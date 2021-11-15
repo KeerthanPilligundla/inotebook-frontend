@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.fa-edit:hover,.fa-eye:hover,.fa-trash:hover {
+  color: red !important;
+}
+i{
+  cursor: pointer;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #002966 !important;
+}
+
+
+.btn-outline-primary {
+  color: #002966;
+  background-color: transparent;
+  background-image: none;
+  border-color:#002966
+}
+
+.btn-outline-primary:hover {
+  color: white;
+  background-color: #002966;
+  border-color: #002966
+}
