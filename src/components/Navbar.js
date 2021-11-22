@@ -1,9 +1,9 @@
 import React from 'react'
-import {Link,useLocation} from "react-router-dom";
-import {useNavigate} from 'react-router-dom'
+import { Link, useLocation } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 const Navbar = () => {
     const navigate = useNavigate();
-    const handleLogout = () =>{
+    const handleLogout = () => {
         localStorage.removeItem('token');
         navigate("/login")
     }
@@ -26,16 +26,23 @@ const Navbar = () => {
                             </li>
                         </ul>
                     </div>
-                    {(!localStorage.getItem('token'))?
-                    <form className="d-flex">
-                        <Link className="btn btn-light mx-1" to="/signup" role="button">Signup</Link>
-                        <Link className="btn btn-light mx-1" to="/login" role="button">Login</Link>
-                    </form>:
-                    <form className="d-flex">
-                        <Link className="btn btn-success mx-1" to="/edit" role="button">Edit Profile</Link>
-                        <button type="button" className="btn btn-danger mx-1" onClick={handleLogout}>Logout</button>
-                    </form>
+                    {(!localStorage.getItem('token')) ?
+                        <form className="d-flex">
+                            <Link className="btn btn-light mx-1" to="/signup" role="button">Signup</Link>
+                            <Link className="btn btn-light mx-1" to="/login" role="button">Login</Link>
+                        </form> :
+                        <form className="d-flex">
+                            <Link className="btn btn-success mx-1" to="/editprofile" role="button">Edit Profile</Link>
+                            <button type="button" className="btn btn-danger mx-1" onClick={handleLogout}>Logout</button>
+                        </form>
                     }
+                </div>
+            </nav>
+            <nav className="navbar fixed-bottom navbar-dark" style={{ backgroundColor: "#002966" }}>
+                <div className="container-fluid">
+                    <ul className="navbar-nav m-auto mb-2 mb-lg-0">
+                        <li className="nav-item" style={{color:"white"}}>©2021-2022 Copyright : keerthan245@gmail.com</li>
+                    </ul>
                 </div>
             </nav>
         </div>

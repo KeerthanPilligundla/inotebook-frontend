@@ -1,28 +1,32 @@
 import React,{useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import Spinner from './Spinner';
 
 const Signup = (props) => {
-    const [credentails, setCredentials] = useState({name:"",email:"",password:"",cpassword:""})
+    const [credentails, setCredentials] = useState({name:"",email:"",password:"",phoneNumber:""})
+    const [loading, setLoading] = useState(false)
     let navigate = useNavigate();
     const {showAlert} = props
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const url =" http://localhost:5000/api/auth/createUser";
+        setLoading(true)
+        const url =" https://inoteboook.herokuapp.com/api/auth/createUser";
         const response = await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ name:credentails.name,email:credentails.email, password:credentails.password}),
+            body: JSON.stringify({ name:credentails.name,email:credentails.email, password:credentails.password, phoneNumber:credentails.phoneNumber}),
         });
-        console.log(response.status)
         if(response.status===201){
             const json = await response.json();
-            //localStorage.setItem('token',json.authtoken);
+            setLoading(false)
+            console.log(json)
             navigate("/login")
             showAlert("Signup succesfull, please login to continue","success")
         }else{
-            showAlert("Invalid Details","Danger")
+            setLoading(false)
+            showAlert("Invalid Details","danger")
         }
     }
     const onChange = (e) =>{
@@ -46,10 +50,13 @@ const Signup = (props) => {
                     <input type="password" className="form-control" onChange={onChange}  id="password" name="password" minLength={5} required/>
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="cpassword" className="form-label">Confirm Password</label>
-                    <input type="password" className="form-control" onChange={onChange}  id="cpassword" name="cpassword" minLength={5} required/>
+                    <label htmlFor="phoneNumber" className="form-label">Phone Number</label>
+                    <input type="text" className="form-control" onChange={onChange}  id="phoneNumber" name="phoneNumber" minLength={10}  maxLength={10} required/>
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <div className="d-grid gap-2">
+                    <button type="submit" className="btn btn-primary">Register</button>
+                    {loading && <Spinner/>}
+                </div>
                 </form>
         </div>
     )

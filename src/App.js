@@ -9,7 +9,10 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import View from "./components/View";
 import React,{useState} from 'react';
-
+import Forgot from "./components/Forgot";
+import Changepassword from "./components/Changepassword";
+import Editprofile from "./components/Editprofile";
+import Resetpassword from "./components/Resetpassword";
 function App() {
   const [alert, setAlert] = useState(null)
   const showAlert = (message,type)=>{
@@ -36,6 +39,10 @@ function App() {
               <Route exact path="/login" element={<Login showAlert={showAlert}/>} />
               <Route exact path="/signup" element={<Signup showAlert={showAlert}/>} />
               <Route exact path="/view" element={<View/>} />
+              <Route exact path="/forgot" element={<Forgot showAlert={showAlert}/>} />
+              <Route exact path="/changepassword" element={<Changepassword showAlert={showAlert}/>}/>
+              <Route exact path="/resetpassword" element={<Resetpassword showAlert={showAlert}/>}/>
+              <Route exact path="/editprofile" element={<Editprofile showAlert={showAlert}/>}/>
             </Routes>
           </div>
         </Router>

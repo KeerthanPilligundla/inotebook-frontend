@@ -3,6 +3,7 @@ import noteContext from '../context/notes/notesContext'
 import Notesitem from './Notesitem';
 import { Link } from "react-router-dom";
 import {useNavigate} from 'react-router-dom'
+import Spinner from './Spinner'
 const Notes = (props) => {
     const context = useContext(noteContext);
     const { notes, getallNotes, editNotes } = context;
@@ -11,9 +12,11 @@ const Notes = (props) => {
     const refClose = useRef(null)
     const { showAlert } = props
     const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" })
+    const [loading, setLoading] = useState(true)
     useEffect(() => {
         if(localStorage.getItem('token')){
             getallNotes()
+            setLoading(false)
         }else{
             navigate("/login")
         }
@@ -85,6 +88,7 @@ const Notes = (props) => {
                         </ul>
                     </div>
                 </nav>
+                {loading && <Spinner/>}
                 <div className="row my-3">
                     <div>
                         {notes.length === 0 && 'No notes to display. please add notes'}
